@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   appName: 'Gastos',
-  host:'https://gastosxema2.herokuapp.com/api/'
+  host:'https://gastosxema1.herokuapp.com/api/'
   //host:'http://localhost:8085/'
 };
 
