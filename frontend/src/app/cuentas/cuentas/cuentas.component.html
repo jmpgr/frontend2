@@ -1,0 +1,10 @@
+<a routerLink="/nueva-cuenta" routerLinkActive="router-link-active" class="button btn-outline-primary">Nueva Cuenta</a>
+
+<div class="row" *ngFor='let cuenta of cuentas'>
+    <div class="col-1 mt-3"> {{cuenta.id }}</div>
+    <div class="col-4 mt-3"> {{cuenta.iban | uppercase}}</div>
+    <div class="col-1"><button type="button" class="btn btn-outline-primary" routerLink='/cuentas/{{cuenta.id}}'>Ver</button></div>
+    <div class="col-1"><button type="button" class="btn btn-outline-primary" (click)="borrarCuenta(cuenta._links.self.href)">Borrar</button></div>
+
+</div>
+

@@ -1,0 +1,111 @@
+<form [formGroup]="formularioBusqueda" (ngSubmit)="buscarMovimientos()">
+    <p>Comparar movimientos</p>
+
+    <div class="row">
+        <div class="col-6">
+            <select class="custom-select" formControlName="iban1">
+      <option selected disabled>Cuenta 1</option>
+      <option [value]="cuenta.iban"
+              *ngFor="let cuenta of cuentas">{{cuenta.iban}}</option>
+    </select>
+        </div>
+        <div class="col-6">
+            <select class="custom-select" formControlName="iban2">
+      <option selected disabled>Cuenta 2</option>
+      <option [value]="cuenta.iban"
+              *ngFor="let cuenta of cuentas">{{cuenta.iban}}</option>
+    </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <select class="custom-select" formControlName="categoria">
+      <option selected disabled>Categorias</option>
+      <option [value]="categoria.nombreCategoria"
+              *ngFor="let categoria of categorias">{{categoria.nombreCategoria | uppercase}}</option>
+    </select>
+        </div>
+    </div>
+    <br>
+    <input [disabled]="formularioBusqueda.invalid" type="submit" value="Comparar" class="waves-effect green darken-1 btn btn-large" />
+</form>
+
+<div *ngIf="movimientos1">
+    <ul class="nav nav-pills">
+        <li class="active"><a class="nav-link active" data-toggle="pill" href="#ingresos">Ingresos</a></li>
+        <li><a class="nav-link" data-toggle="pill" href="#gastos">Gastos</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="ingresos" class="tab-pane fade active show">
+            <div class="row">
+                <div class="col-6">
+                    <h2>Cuenta 1</h2>
+                    <h4>{{sumarIngresos1(movimientos1)}} €</h4>
+
+                    <div *ngIf="movimientos1.ingresos.length > 0; else vacio">
+                        <div class="row" *ngFor='let ingreso of movimientos1.ingresos'>
+                            <div class="col-2 mt-3"> {{ingreso.importe }} €</div>
+                            <div class="col-4 mt-3"> {{ingreso.concepto}}</div>
+                            <div class="col-3 mt-3"> {{ingreso.fecha}}</div>
+                            <div class="col-2 mt-3"> {{ingreso.idMovimiento}}</div>
+                            <div class="col-1 mt-3"> {{ingreso.compartido}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h2>Cuenta 2</h2>
+                    <h4>{{sumarIngresos2(movimientos2)}} €</h4>
+                    <div *ngIf="movimientos2.ingresos.length > 0; else vacio">
+                        <div class="row" *ngFor='let ingreso of movimientos2.ingresos'>
+                            <div class="col-2 mt-3"> {{ingreso.importe }} €</div>
+                            <div class="col-4 mt-3"> {{ingreso.concepto}}</div>
+                            <div class="col-3 mt-3"> {{ingreso.fecha}}</div>
+                            <div class="col-2 mt-3"> {{ingreso.idMovimiento}}</div>
+                            <div class="col-1 mt-3"> {{ingreso.compartido}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gastos" class="tab-pane fade">
+            <div class="row">
+                <div class="col-6">
+                    <h2>Cuenta 1</h2>
+
+                    <h4>{{sumarGastos1(movimientos1)}} €</h4>
+                    <div *ngIf="movimientos1.gastos.length > 0; else vacio">
+                        <div class="row" *ngFor='let gasto of movimientos1.gastos'>
+                            <div class="col-2 mt-3"> {{gasto.importe }} €</div>
+                            <div class="col-4 mt-3"> {{gasto.concepto}}</div>
+                            <div class="col-3 mt-3"> {{gasto.fecha}}</div>
+                            <div class="col-2 mt-3"> {{gasto.idMovimiento}}</div>
+                            <div class="col-1 mt-3"> {{gasto.autorizado}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h2>Cuenta 2</h2>
+
+                    <h4>{{sumarGastos2(movimientos2)}} €</h4>
+                    <div *ngIf="movimientos2.gastos.length > 0; else vacio">
+                        <div class="row" *ngFor='let gasto of movimientos2.gastos'>
+                            <div class="col-2 mt-3"> {{gasto.importe }} €</div>
+                            <div class="col-4 mt-3"> {{gasto.concepto}}</div>
+                            <div class="col-3 mt-3"> {{gasto.fecha}}</div>
+                            <div class="col-2 mt-3"> {{gasto.idMovimiento}}</div>
+                            <div class="col-1 mt-3"> {{gasto.autorizado}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #vacio>
+    <p>
+        Aún no hay ningún movimiento
+    </p>
+</ng-template>

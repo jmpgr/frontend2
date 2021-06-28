@@ -1,0 +1,11 @@
+
+<a routerLink="/nueva-categoria" routerLinkActive="router-link-active" class="button btn-outline-primary">Nueva Categoria</a>
+
+<div class='row' *ngFor='let categoria of categorias'>
+    <div class="col-1 mt-3"> {{categoria.id}} </div>
+    <div class="col-4 mt-3"> {{categoria.nombreCategoria | uppercase}}</div>
+    <div class="col-1"><button type="button" class="btn btn-outline-primary" routerLink='/categorias/{{categoria.id}}'>Editar</button></div>
+    <div class="col-1"><button type="button" class="btn btn-outline-primary" (click)="borrarCategoria(categoria._links.self.href)">Borrar</button></div>
+</div>
+
+<router-outlet></router-outlet>

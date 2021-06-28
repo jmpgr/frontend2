@@ -1,0 +1,44 @@
+<form [formGroup]="formularioIngreso" (ngSubmit)="crearIngreso()">
+  <p>Nuevo Ingreso</p>
+  <div class="row">
+    <div class="col-4">
+      <input class="form-control" type="" name="" formControlName="idMovimiento" placeholder="ID movimiento"/>
+    </div>
+    <div class="col-4">
+      <input class="form-control" type="date" name="" formControlName="fecha"/>
+    </div>
+    <div class="col-4">
+      <input class="form-control" type="number" name="" formControlName="importe" placeholder="Importe"/>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <input class="form-control" type="" name="" formControlName="concepto" placeholder="Concepto"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <select class="custom-select" formControlName="categoria">
+        <option disabled>Categoria</option>
+        <option [value]="categoria._links.self.href"
+                *ngFor="let categoria of categorias">{{categoria.nombreCategoria | uppercase}}</option>
+      </select>
+    </div>
+    <div class="col-6">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" formControlName="compartido">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Compartido</label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <input
+    [disabled]="formularioIngreso.invalid"
+    type="submit"
+    value="Añadir"
+    class="waves-effect green darken-1 btn btn-large"
+  />
+
+</form>

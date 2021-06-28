@@ -1,0 +1,49 @@
+<h2>Cuenta: {{cuenta.iban}}</h2>
+<h3>Total en cuenta: {{total}} €</h3>
+
+<form [formGroup]="formularioAltaCuenta" (ngSubmit)="modificarCuenta()">
+  <p>IBAN</p>
+  <input type="" name="" formControlName="iban"/>
+
+  <input
+    type="submit"
+    value="Modificar IBAN"
+    class="waves-effect green darken-1 btn btn-large"
+  />
+</form>
+
+<div class="row">
+  <div class="col-6">
+    <h4>INGRESOS</h4>
+    <a routerLink="/cuentas/{{cuentaId}}/nuevo-ingreso" routerLinkActive="router-link-active" class="button btn-outline-primary">Agregar</a>
+    <div *ngIf="movimientos.ingresos.length > 0; else vacio">
+      <div class="row" *ngFor='let ingreso of movimientos.ingresos'>
+        <div class="col-2 mt-3"> {{ingreso.importe }} €</div>
+        <div class="col-4 mt-3"> {{ingreso.concepto}}</div>
+        <div class="col-3 mt-3"> {{ingreso.fecha}}</div>
+        <div class="col-2 mt-3"> {{ingreso.idMovimiento}}</div>
+        <div class="col-1 mt-3"> {{ingreso.compartido}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <h4>GASTOS</h4>
+    <a routerLink="/cuentas/{{cuentaId}}/nuevo-gasto" routerLinkActive="router-link-active" class="button btn-outline-primary">Agregar</a>
+    <div *ngIf="movimientos.gastos.length > 0; else vacio">
+      <div class="row" *ngFor='let gasto of movimientos.gastos'>
+        <div class="col-2 mt-3"> {{gasto.importe }} €</div>
+        <div class="col-4 mt-3"> {{gasto.concepto}}</div>
+        <div class="col-3 mt-3"> {{gasto.fecha}}</div>
+        <div class="col-2 mt-3"> {{gasto.idMovimiento}}</div>
+        <div class="col-1 mt-3"> {{gasto.autorizado}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #vacio>
+  <p>
+    Aún no hay ningún movimiento
+  </p>
+</ng-template>
